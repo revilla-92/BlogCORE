@@ -1,0 +1,16 @@
+<% if (session.user) { %>
+    <form class="stars"
+              method='post' 
+              action='/users/<%= session.user.id %>/favourites/<%= post.id %>'>
+          <input type='hidden' name='_method' value='put'>
+          <input type='hidden' name='best' value='5'>
+          <input type='hidden' name='redir' value="<%= url || '' %>" >
+          <input type="image" src="/images/star_grey.png" 
+                   onclick="this.form._method.value='delete';" />
+         <% for (var v=1 ; v<6 ; v++) { %>
+               <input type="image"
+                          onclick="this.form.best.value='<%= v %>';"
+                          src="/images/star_<%= post.best >= v ? 'yellow' : 'white' %>.png" />
+         <% } %>
+   </form>
+<% } %>
